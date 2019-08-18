@@ -61,7 +61,7 @@ def main():
                              headers={'Authorization': 'Bearer %s' % token})
 
             update_broadcaster_status(r.json()['data'])
-            print 'Waiting for twtich casters to go live...'
+            print 'Waiting for twitch casters to go live...'
             time.sleep(1)
         except Exception as e:
             print 'Whoops, we got an error! Lets refresh our token just in case\n %s' % e
