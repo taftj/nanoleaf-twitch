@@ -17,6 +17,12 @@ def flash_panels(alt_mode=False):
         time.sleep(3)
         requests.put(config['Nanoleaf']['nano_host'] + '/effects/select', json={'select': current_mode})
 
+
+def get_twitch_token():
+    r = requests.post('https://id.twitch.tv/oauth2/token?client_id=%s&client_secret=%s&grant_type=client_credentials&scope=user:edit' % \
+                        (config['Twitch']['client_id'], config['Twitch']['client_secret']))
+    return r.json()['access_token']
+
 def main():
     def update_broadcaster_status(caster_list):
         currently_live = []
@@ -32,11 +38,6 @@ def main():
         for key in broadcaster_status.keys():
             if broadcaster_status[key] == 'Live' and (key not in currently_live):
                 broadcaster_status[key] = 'Offline'
-
-    def get_twitch_token():
-        r = requests.post('https://id.twitch.tv/oauth2/token?client_id=%s&client_secret=%s&grant_type=client_credentials&scope=user:edit' % \
-                          (config['Twitch']['client_id'], config['Twitch']['client_secret']))
-        return r.json()['access_token']
 
     config.read(CONFIG_PATH)
     id_list_as_string = ''
