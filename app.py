@@ -19,7 +19,7 @@ def flash_panels(alt_mode=False):
 
 
 def get_twitch_token():
-    r = requests.post('https://id.twitch.tv/oauth2/token?client_id=%s&client_secret=%s&grant_type=client_credentials&scope=user:edit' % \
+    r = requests.post('https://id.twitch.tv/oauth2/token?client_id=%s&client_secret=%s&grant_type=client_credentials' % \
                         (config['Twitch']['client_id'], config['Twitch']['client_secret']))
     return r.json()['access_token']
 
